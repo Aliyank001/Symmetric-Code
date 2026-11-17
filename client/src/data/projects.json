@@ -1,0 +1,79 @@
+[
+  {
+    "id": "client-requirement",
+    "title": "Client Requirement Website",
+    "image": "/images/projects/client-requirement.webp",
+    "description": "Client Requirements Portal guides clients through a step-by-step form to define their website requirements. Clients can review their answers, download a PDF project brief, and share it via email or WhatsApp.",
+    "liveUrl": "https://clientrequirement.consulting/",
+    "githubUrl": "https://github.com/Aliyank001/symmetric-code-portal.git",
+    "category": "Tools & platforms",
+    "type": "Client website",
+    "sourceType": "deployed"
+  },
+  {
+    "id": "skin-laser-clinic",
+    "title": "Skin & Laser Clinic Website",
+    "image": "/images/projects/zahra-clinic.jpg",
+    "description": "Custom website for Dr. Hina's skin & laser clinic with appointment booking, service pages, image gallery, and responsive, SEO-friendly design.",
+    "liveUrl": "https://www.zahraskinlaserclinicbydrhina.com/",
+    "githubUrl": null,
+    "category": "Healthcare",
+    "type": "Client website",
+    "sourceType": "deployed"
+  },
+  {
+    "id": "cafe",
+    "title": "Café Website",
+    "image": "/images/projects/cafe-aroma.jpg",
+    "description": "Contemporary café site with interactive menu, featured specials, photo gallery, and contact/ordering CTA; mobile-first and demo-ready.",
+    "liveUrl": "https://coffee-24mm.vercel.app/",
+    "githubUrl": "https://github.com/Aliyank001/Coffee-frontend.git",
+    "category": "Food & hospitality",
+    "type": "Website demo",
+    "sourceType": "html"
+  },
+  {
+    "id": "hair-transplant",
+    "title": "Hair Transplant Website",
+    "image": "/images/projects/hair-transplant.webp",
+    "description": "Clinic-focused hair transplant website showcasing procedures, before/after gallery, team bios, and an easy contact form; responsive demo.",
+    "liveUrl": "https://aliyank001.github.io/hair-transplant-frontend/",
+    "githubUrl": "https://github.com/Aliyank001/hair-transplant-frontend.git",
+    "category": "Healthcare",
+    "type": "Website demo",
+    "sourceType": "html"
+  },
+  {
+    "id": "home-decor",
+    "title": "Home Décor Website",
+    "image": "/images/projects/home-decor.webp",
+    "description": "Home décor showcase with seven designed pages, product highlights, smooth animations, and responsive layouts for seamless browsing.",
+    "liveUrl": "https://aliyank001.github.io/Home-decore-website/",
+    "githubUrl": "https://github.com/Aliyank001/Home-decore-website.git",
+    "category": "Home & interiors",
+    "type": "Website demo",
+    "sourceType": "html"
+  },
+  {
+    "id": "real-estate",
+    "title": "Real Estate Website",
+    "image": "/images/projects/real-estate.webp",
+    "description": "Real estate demo tailored for the Gulf market with property listings, advanced search UI, high-end visuals, and lead-capture features.",
+    "liveUrl": "https://aliyank001.github.io/Real-State-website-frontend-/",
+    "githubUrl": "https://github.com/Aliyank001/Real-State-website-frontend-.git",
+    "category": "Real estate",
+    "type": "Website demo",
+    "sourceType": "html"
+  },
+  {
+    "id": "gym",
+    "title": "Gym Website",
+    "image": "/images/projects/gym-website.webp",
+    "description": "Fitness studio site showcasing programs, trainer profiles, class schedules, and membership call-to-actions.",
+    "liveUrl": "https://aliyank001.github.io/gym-website-frontend/",
+    "githubUrl": "https://github.com/Aliyank001/gym-website-frontend.git",
+    "category": "Fitness",
+    "type": "Website demo",
+    "sourceType": "html"
+  }
+]
