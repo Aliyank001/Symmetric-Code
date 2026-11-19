@@ -3,15 +3,15 @@ import react from '@vitejs/plugin-react';
 import { solutions } from './src/data/solutions.js';
 import { blogPosts } from './src/data/blogPosts.js';
 import { legalDocs } from './src/data/legalDocs.js';
+import { services } from './src/data/site.js';
 
 function seoFiles() {
   return {
     name: 'symmetric-code-seo-files',
     generateBundle() {
-      const siteUrl = (process.env.VITE_SITE_URL || 'https://your-domain.com').replace(/\/+$/, '');
-      const serviceSlugs = ['web-development', 'app-development', 'pos-custom-software', 'ai-solutions', 'business-automation'];
+      const siteUrl = (process.env.VITE_SITE_URL || 'https://symmetriccode.tech').replace(/\/+$/, '');
       const routes = [
-        '/', '/services', ...serviceSlugs.map(slug => `/services/${slug}`),
+        '/', '/services', ...services.map(service => `/services/${service.slug}`),
         '/solutions', ...solutions.map(item => `/solutions/${item.slug}`),
         '/work', '/pricing', '/about', '/team/aaliyan', '/contact', '/insights',
         ...blogPosts.map(post => `/insights/${post.slug}`),

@@ -64,6 +64,9 @@ button:focus-visible,.nav-cta:focus-visible,.mobile-cta:focus-visible,.round-arr
 .contact-form .optional{font-size:9px;color:#858095}
 .contact-form label:has(.optional){display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:8px}
 .contact-form label:has(.optional) input{grid-column:1/-1}
+.contact-verification{display:grid;gap:10px;justify-items:start;padding:14px 16px;border:1px solid #e7e2f0;border-radius:14px;background:rgba(247,246,251,.7)}
+.contact-verification .eyebrow{font-size:9px;color:#746b8e}
+.contact-verification>div{min-height:65px}
 .contact-form button{width:100%;min-width:0;justify-self:stretch;margin-top:2px;padding-inline:24px}
 .form-privacy{font-size:11px;line-height:1.65;color:#777386}
 .form-privacy a{color:#6045c7;text-decoration:underline;text-underline-offset:3px}
@@ -131,20 +134,19 @@ button:focus-visible,.nav-cta:focus-visible,.mobile-cta:focus-visible,.round-arr
 .intro-kicker{position:absolute;top:clamp(24px,5vh,52px);left:clamp(22px,6vw,80px);right:clamp(22px,6vw,80px);display:flex;justify-content:space-between;font:10px var(--mono);letter-spacing:.15em;color:#716b81}
 .intro-wordmark{position:relative;z-index:3;margin:0;font-size:clamp(34px,8vw,104px);line-height:1;letter-spacing:-.075em;font-weight:800;white-space:nowrap;color:#211b36;text-shadow:0 10px 34px rgba(59,42,105,.08)}
 .intro-caption{position:absolute;z-index:3;top:calc(50% + clamp(42px,7vw,78px));margin:0;font:10px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#776d8d}
-.intro-card-stack{position:absolute;left:50%;bottom:-14%;width:min(620px,86vw);height:42%;transform:translateX(-50%);perspective:900px}
-.intro-tile{position:absolute;bottom:0;left:50%;width:clamp(100px,17vw,210px);height:clamp(150px,26vw,310px);margin-left:calc(clamp(100px,17vw,210px) / -2);display:grid;place-items:center;border:1px solid rgba(255,255,255,.68);border-radius:22px;box-shadow:0 25px 70px rgba(50,39,83,.16);backdrop-filter:blur(12px);font-size:clamp(34px,6vw,76px);font-weight:800;color:#fff}
+.intro-card-stack{--intro-tile-width:min(210px,23.5vw);position:absolute;left:50%;bottom:-14%;width:min(840px,94vw);height:42%;transform:translateX(-50%);perspective:900px}
+.intro-tile{position:absolute;bottom:0;left:0;width:var(--intro-tile-width);height:auto;aspect-ratio:.677;margin-left:0;display:grid;place-items:center;border:1px solid rgba(255,255,255,.68);border-radius:22px;box-shadow:0 25px 70px rgba(50,39,83,.16);backdrop-filter:blur(12px);font-size:clamp(34px,6vw,76px);font-weight:800;color:#fff}
 .intro-tile span{display:grid;place-items:center;width:52%;aspect-ratio:1;border:1px solid rgba(255,255,255,.42);border-radius:50%;background:rgba(255,255,255,.12)}
 .intro-tile-1{background:linear-gradient(145deg,#8358df,#4a67d4);transform:translateX(-126%) rotate(-18deg)}
 .intro-tile-2{background:linear-gradient(145deg,#2a2740,#51416d);transform:translateX(-64%) rotate(-9deg)}
 .intro-tile-3{background:linear-gradient(145deg,#a28bd0,#6478cc);transform:translateX(0) rotate(0)}
 .intro-tile-4{background:linear-gradient(145deg,#d5c5f2,#718ce0);transform:translateX(64%) rotate(9deg)}
 .intro-tile-5{background:linear-gradient(145deg,#a9cd70,#578e8e);transform:translateX(126%) rotate(18deg)}
-.intro-tile{left:10%;margin-left:0}
-.intro-tile-2{left:29%}.intro-tile-3{left:48%}.intro-tile-4{left:67%}.intro-tile-5{left:86%}
+.intro-tile-1{left:0%}.intro-tile-2{left:18.75%}.intro-tile-3{left:37.5%}.intro-tile-4{left:56.25%}.intro-tile-5{left:75%}
 .intro-progress{position:absolute;left:clamp(22px,6vw,80px);right:clamp(22px,6vw,80px);bottom:clamp(22px,4vh,42px);height:2px;background:rgba(94,76,142,.13);overflow:hidden}
 .intro-progress span{display:block;width:100%;height:100%;transform-origin:left;background:linear-gradient(90deg,#8358df,#4a72dc,#a9cd70)}
 .site-header .brand-name{transition:opacity .25s ease}
-@media(max-width:600px){.intro-kicker{font-size:8px}.intro-wordmark{font-size:clamp(31px,8.7vw,52px);letter-spacing:-.07em}.intro-caption{font-size:8px;letter-spacing:.11em;top:calc(50% + 45px)}.intro-card-stack{width:96vw;height:36%}.intro-tile{border-radius:16px}}
+@media(max-width:600px){.intro-kicker{font-size:8px}.intro-wordmark{max-width:calc(100vw - 28px);font-size:clamp(29px,8.4vw,48px);letter-spacing:-.075em}.intro-caption{font-size:8px;letter-spacing:.11em;top:calc(50% + 42px)}.intro-card-stack{--intro-tile-width:min(100px,23.5vw);left:50%;bottom:5%;width:min(840px,94vw);height:36%;overflow:visible}.intro-tile{border-radius:14px}}
 @media(prefers-reduced-motion:reduce){.intro-overlay{display:none!important}}
 .brand-mark{background:transparent;overflow:visible;border-radius:0}
 .brand-mark img{width:100%;height:100%;object-fit:contain;object-position:center;transform:none;mix-blend-mode:normal}
@@ -196,9 +198,9 @@ button:focus-visible,.nav-cta:focus-visible,.mobile-cta:focus-visible,.round-arr
 @media(max-width:760px){.team-card-shell{height:clamp(165px,35vw,205px)}.team-back-mark{width:45px}.team-card-back small{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.team-card-shell{animation:none}.team-flip-inner{transition:none}}
 @media(max-width:680px){.about-brand-image{height:290px}}
-.intro-content-hidden{visibility:hidden}
 .intro-overlay{contain:layout paint;isolation:isolate}
-.intro-card-stack{contain:layout paint}
+.intro-card-stack{contain:layout}
 .intro-tile{backdrop-filter:none;box-shadow:0 18px 42px rgba(50,39,83,.12);will-change:transform,opacity;backface-visibility:hidden}
 .intro-wordmark{will-change:transform;backface-visibility:hidden}
 @media(max-width:760px){.site-header{height:68px}.nav-shell{padding:0 20px}.nav-cta{display:none}.menu-toggle{display:block;padding:7px}.nav-links{display:none;position:absolute;left:0;right:0;top:67px;padding:18px;background:var(--paper);border-bottom:1px solid var(--line);align-items:stretch;gap:0;flex-direction:column;box-shadow:0 14px 24px rgba(20,22,16,.08)}.nav-links.open{display:flex}.nav-links>a{padding:14px 5px;border-bottom:1px solid #e7e8e2}.nav-links .mobile-cta{display:flex;border:0;font-size:12px;color:var(--ink);height:auto}}
+.legal-effective-date{margin:14px 0 0!important;font:10px var(--mono)!important;color:#77758a!important}

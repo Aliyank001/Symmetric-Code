@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local Cloudflare Pages Functions secrets; never commit .dev.vars.
+RESEND_API_KEY=
+CONTACT_FROM_EMAIL=
+CONTACT_TO_EMAIL=symmetriccode01@gmail.com
+TURNSTILE_SECRET_KEY=
