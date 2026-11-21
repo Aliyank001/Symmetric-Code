@@ -59,7 +59,7 @@ function Header({introActive=false}) {
       window.scrollTo(0, scrollY);
     };
   }, [open]);
-  return <><header className="site-header"><div className="nav-shell">
+  return <><header className={open ? 'site-header menu-open' : 'site-header'}><div className="nav-shell">
     <Link to="/" className="brand" onClick={closeMenu}><span className="brand-mark"><img src="/images/symmetric-code-mark.png" alt="" /></span><motion.span layoutId="symmetric-code-wordmark" className="brand-name" style={{opacity:introActive?0:1}} transition={{layout:{type:'spring',stiffness:115,damping:25,mass:1},opacity:{duration:.25,delay:introActive?0:.45}}}>SYMMETRIC CODE</motion.span></Link>
     <nav className={open ? 'nav-links open' : 'nav-links'}>{nav.map(({label,href,children})=><div className={children?'nav-entry has-mobile-dropdown':'nav-entry'} key={href}>
       <NavLink className="desktop-nav-item" to={href} onClick={closeMenu}>{label}</NavLink>
@@ -71,7 +71,7 @@ function Header({introActive=false}) {
 }
 
 function Footer() {
-  return <footer className="footer"><div className="footer-main"><div><Link to="/" className="brand footer-brand"><span className="brand-mark"><img src="/images/symmetric-code-mark.png" alt="" /></span><span className="brand-name">SYMMETRIC CODE</span></Link><p>Thoughtful software for businesses ready to move forward.</p></div><div className="footer-links"><div><span className="eyebrow">EXPLORE</span><Link to="/services">Services</Link><Link to="/solutions">Industries</Link><Link to="/work">Selected work</Link><Link to="/pricing">Pricing approach</Link><Link to="/about">About us</Link><Link to="/insights">Insights</Link></div><div><span className="eyebrow">SAY HELLO</span><a href="mailto:symmetriccode01@gmail.com">symmetriccode01@gmail.com</a><a href="tel:+923083504631">+92 308 3504631</a><Link to="/contact">Book a conversation <ArrowUpRight size={14}/></Link></div><div><span className="eyebrow">POLICIES</span><Link to="/legal/terms">Terms & conditions</Link><Link to="/legal/privacy">Privacy policy</Link><Link to="/legal/cookies">Cookie policy</Link><Link to="/legal/service-agreement">Service agreement</Link><Link to="/legal/disclaimer">Disclaimer</Link></div></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Symmetric Code</span><span>Made with care <span className="status-dot"/> Open to international projects</span></div></footer>;
+  return <footer className="footer"><div className="footer-main"><div><Link to="/" className="brand footer-brand"><span className="brand-mark"><img src="/images/symmetric-code-mark.png" alt="" /></span><span className="brand-name">SYMMETRIC CODE</span></Link><p>Thoughtful software for businesses ready to move forward.</p></div><div className="footer-links"><div><span className="eyebrow">EXPLORE</span><Link to="/services">Services</Link><Link to="/solutions">Industries</Link><Link to="/work">Selected work</Link><Link to="/pricing">Pricing approach</Link><Link to="/about">About us</Link><Link to="/insights">Insights</Link></div><div><span className="eyebrow">SAY HELLO</span><a href="mailto:symmetriccode01@gmail.com">symmetriccode01@gmail.com</a><a href="tel:+923083504631">+92 308 3504631</a><Link to="/contact">Book a conversation <ArrowUpRight size={14}/></Link></div><div><span className="eyebrow">POLICIES</span><Link to="/legal/terms">Terms & conditions</Link><Link to="/legal/privacy">Privacy policy</Link><Link to="/legal/cookies">Cookie policy</Link><Link to="/legal/service-agreement">Service agreement</Link><Link to="/legal/disclaimer">Disclaimer</Link></div></div></div><div className="footer-wordmark" aria-hidden="true">SYMMETRIC CODE</div><div className="footer-bottom"><span>© {new Date().getFullYear()} Symmetric Code</span><span>Made with care <span className="status-dot"/> Open to international projects</span></div></footer>;
 }
 
 function ProjectVisual({ project }) {
@@ -131,7 +131,7 @@ function MobileProjectDeck() {
     target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  return <div className="home-project-stack" ref={stackRef} style={{ '--deck-tone': projectCardTones[activeIndex] }} aria-label="Selected projects">
+  return <div className="home-project-stack" ref={stackRef} aria-label="Selected projects">
     {visibleProjects.map((project, index) => {
       const liveUrl = safeUrl(project.liveUrl);
       const depth = (index - activeIndex + visibleProjects.length) % visibleProjects.length;
@@ -141,7 +141,7 @@ function MobileProjectDeck() {
         { opacity: .4, scale: .9, y: -22, rotate: 5 },
         { opacity: .2, scale: .85, y: -32, rotate: -7 },
       ][depth];
-      return <div className="home-project-stack-item" id={`home-project-${index}`} style={{ '--stack-index': index, '--card-tone': projectCardTones[index] }} key={project.id}>
+      return <div className={`home-project-stack-item${index === visibleProjects.length - 1 ? ' is-last' : ''}`} id={`home-project-${index}`} style={{ '--stack-index': index, '--card-tone': projectCardTones[index] }} key={project.id}>
         <motion.div className="home-project-card" style={{ '--card-tone': projectCardTones[index], zIndex: 10 - depth }} animate={depthStyles} transition={{ type: 'spring', stiffness: 260, damping: 24, mass: .9 }}>
           <motion.button className="home-project-card-main" type="button" onClick={() => advance(index)} whileTap={{ scale: .97 }} transition={{ type: 'spring', stiffness: 260, damping: 24, mass: .9 }} aria-label={`Show the next project after ${project.title}`}>
             <span className="home-project-card-head"><FolderOpen size={20} strokeWidth={1.7}/></span>
@@ -199,7 +199,7 @@ function Home() {
 
    <section className="section process-section"><div className="section-heading"><div><span className="eyebrow">HOW WE WORK</span><h2>Clear steps.<br/>No mystery.</h2></div><p>Good results start with listening. We keep you involved from the first conversation through launch and beyond.</p></div><div className="process-grid">{[['01','Understand','We learn how your business works, who it serves, and what needs to get better.'],['02','Shape','Together we define the scope, experience and priorities before building.'],['03','Build','We create in focused steps, share progress, and refine with your feedback.'],['04','Launch','We help you launch with confidence and support the next improvements.']].map(([n,t,d])=><article key={n}><span>{n}</span><div className="process-line"/><h3>{t}</h3><p>{d}</p></article>)}</div></section>
 
-   <section className="cta-band"><div className="cta-orb">✳</div><div><span className="eyebrow">HAVE A PROJECT IN MIND?</span><h2>Let’s make it<br/><em>work beautifully.</em></h2></div><Link className="button button-light" to="/contact">Start a conversation <ArrowUpRight size={17}/></Link></section>
+   <section className="cta-band"><div className="cta-orb" aria-hidden="true"><svg viewBox="0 0 100 100" focusable="false"><path d="M50 5v90M5 50h90M18 18l64 64M82 18 18 82"/></svg></div><div><span className="eyebrow">HAVE A PROJECT IN MIND?</span><h2>Let’s make it<br/><em>work beautifully.</em></h2></div><Link className="button button-light" to="/contact">Start a conversation <ArrowUpRight size={17}/></Link></section>
   </main><Footer/><StaticAssistant/></>;
 }
 
