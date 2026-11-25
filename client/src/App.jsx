@@ -226,6 +226,7 @@ function ContactBanner(){return <section className="contact-banner"><div><span c
 function ContactPage(){
   const [form,setForm]=useState({name:'',email:'',company:'',service:'',details:'',website:''});
   const [state,setState]=useState('idle');
+  const [submitError,setSubmitError]=useState('');
   const [token,setToken]=useState('');
   const [challengeKey,setChallengeKey]=useState(0);
   const [verificationError,setVerificationError]=useState('');
@@ -235,20 +236,36 @@ function ContactPage(){
     e.preventDefault();
     if(!import.meta.env.DEV&&!productionReady){setState('error');return}
     if(!import.meta.env.DEV&&!token){setVerificationError('Please complete the verification before sending.');return}
+    setSubmitError('');
     setState('sending');
     try{
       const base=import.meta.env.VITE_API_URL||(import.meta.env.DEV?'http://localhost:4000':'');
       const payload=import.meta.env.DEV?form:{...form,token,submissionId:crypto.randomUUID()};
       const res=await fetch(`${base}/api/contact`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
       const result=await res.json();
-      if(!res.ok||!result.message)throw new Error(result.error||'Request failed');
+      if(!res.ok||!result.message){
+        const message=res.status===503
+          ? 'The email service is not configured in the Cloudflare production environment yet.'
+          : res.status===502
+            ? 'The email provider rejected the request. Check the Resend sender domain and sender address.'
+            : res.status===404
+              ? 'The contact API is missing from this Cloudflare deployment. Deploy the latest Pages Functions with the site.'
+            : res.status===403
+              ? 'Security verification expired or could not be validated. Please try again.'
+              : result.error||'The request could not be sent. Please try again.';
+        throw new Error(message);
+      }
       setState('sent');
+      setSubmitError('');
       setForm({name:'',email:'',company:'',service:'',details:'',website:''});
       setToken('');
       setVerificationError('');
       setChallengeKey(key=>key+1);
-    }catch{
+    }catch(error){
       setState('error');
+      setSubmitError(error instanceof TypeError
+        ? 'The contact service could not be reached. Please try again in a moment.'
+        : error.message||'We could not send your request. Please email us directly.');
       if(!import.meta.env.DEV){setToken('');setChallengeKey(key=>key+1)}
     }
   }
@@ -264,7 +281,7 @@ function ContactPage(){
     {verificationError&&<p className="form-message error full-field" role="alert">{verificationError}</p>}
     <button className="button button-dark full-field" disabled={state==='sending'||(!import.meta.env.DEV&&!productionReady)}>{state==='sending'?'Sending…':<>Send consultation request <ArrowUpRight size={16}/></>}</button>
     {state==='sent'&&<p className="form-message success full-field" role="status"><Check size={16}/> Thanks—your consultation request has been emailed to our team. We’ll be in touch.</p>}
-    {state==='error'&&(productionReady||import.meta.env.DEV)&&<p className="form-message error full-field" role="alert">We couldn’t send your request just now. Please email us at <a href="mailto:symmetriccode01@gmail.com">symmetriccode01@gmail.com</a>.</p>}
+    {state==='error'&&(productionReady||import.meta.env.DEV)&&<p className="form-message error full-field" role="alert">{submitError||'We couldn’t send your request just now.'} Please email us at <a href="mailto:symmetriccode01@gmail.com">symmetriccode01@gmail.com</a>.</p>}
     <small className="full-field form-privacy">Your details are used to follow up about this project. Read the <Link to="/legal/privacy">Privacy Policy</Link>.</small>
   </form></section><div className="contact-faq"><span className="eyebrow">BEFORE THE CALL</span><p>We’ll discuss your goals, users, scope, timeline and the best next step. No pressure and no obligation.</p></div></main><Footer/><StaticAssistant/></>;
 }

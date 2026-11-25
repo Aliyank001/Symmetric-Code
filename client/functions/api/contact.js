@@ -43,7 +43,11 @@ export async function onRequestPost({ request, env }) {
   if (!token || token.length > 2048 || !/^[a-f0-9-]{36}$/i.test(submissionId)) return json({ error: 'Please complete the verification and try again.' }, 403);
 
   const requiredEnv = ['RESEND_API_KEY', 'CONTACT_FROM_EMAIL', 'CONTACT_TO_EMAIL', 'TURNSTILE_SECRET_KEY'];
-  if (requiredEnv.some(key => !env[key])) return json({ error: 'Email delivery is not configured yet.' }, 503);
+  const missingEnv = requiredEnv.filter(key => !env[key]);
+  if (missingEnv.length) {
+    console.error('Contact delivery configuration is incomplete:', missingEnv.join(', '));
+    return json({ error: 'Email delivery is not configured yet.' }, 503);
+  }
 
   try {
     const verification = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
@@ -54,6 +58,11 @@ export async function onRequestPost({ request, env }) {
     });
     const challenge = await verification.json();
     if (!challenge.success || challenge.action !== 'contact' || challenge.hostname !== new URL(request.url).hostname) {
+      console.warn('Turnstile rejected contact submission:', JSON.stringify({
+        codes: challenge['error-codes'] || [],
+        action: challenge.action || null,
+        hostname: challenge.hostname || null,
+      }));
       return json({ error: 'Please complete the verification again.' }, 403);
     }
 
@@ -84,7 +93,12 @@ export async function onRequestPost({ request, env }) {
       signal: AbortSignal.timeout(20_000),
     });
     if (!response.ok) {
-      console.error('Consultation email delivery failed:', response.status);
+      const providerError = await response.json().catch(() => ({}));
+      console.error('Resend rejected consultation email:', JSON.stringify({
+        status: response.status,
+        name: providerError.name || null,
+        message: providerError.message || null,
+      }));
       return json({ error: 'We could not deliver your request. Please try again or email us directly.' }, 502);
     }
     return json({ message: 'Your request has been sent.' });
