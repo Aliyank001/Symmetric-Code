@@ -1,4 +1,4 @@
-// Add blog posts here. Each slug becomes a page at /insights/:slug.
+// Add blog posts here. Each slug becomes a prerendered page at /insights/:slug.
 export const blogPosts = [
   {
     slug: 'when-does-a-business-need-custom-software',
@@ -6,12 +6,87 @@ export const blogPosts = [
     excerpt: 'A practical way to tell when spreadsheets and disconnected tools are holding your operations back.',
     category: 'Business software',
     date: '2026-11-16',
-    readTime: '5 min read',
+    readTime: '2 min read',
     body: [
       'Most businesses do not need custom software on day one. Off-the-shelf tools are often the quickest way to get moving. The question changes when your team repeatedly works around those tools instead of getting work done.',
       'Look for repeated manual data entry, reports that take hours to assemble, inventory or appointments tracked in several places, and steps that depend on one person remembering what to do next. These are signs to map the workflow and compare the real cost of workarounds with the cost of a better-fit system.',
       'Before building anything, document who uses the process, what information they need, and what a successful outcome looks like. A focused first release can solve one expensive bottleneck and leave room to expand once the team has real usage feedback.',
-      'The right next step may be a better configuration of existing software, an integration, or a custom system. Start with the business problem; choose the technology after you understand it.'
-    ]
+      'The right next step may be a better configuration of existing software, an integration, or a custom system. Start with the business problem; choose the technology after you understand it.',
+    ],
+  },
+  {
+    slug: 'business-website-development-planning-guide',
+    title: 'Business website development: what should a useful website include?',
+    excerpt: 'A planning guide to clear service pages, customer questions, trust signals and contact flows for a business website.',
+    category: 'Website development',
+    date: '2026-11-25',
+    readTime: '2 min read',
+    relatedService: 'web-development',
+    sections: [
+      { heading: 'Quick answer: start with what visitors need to decide', paragraphs: ['Useful business website development starts with the questions a potential customer needs answered: what you offer, who it is for, what happens next and how to contact you. The design and technology should make those answers easy to find on a phone as well as a desktop.'] },
+      { heading: 'Give each service a clear page', paragraphs: ['If a company offers several services, a single paragraph that lists them all may not explain any of them well. A dedicated service page can describe the problem addressed, the work included, the process and common questions. Keep each page specific to the actual service rather than repeating the same copy with a different keyword.', 'Industry pages can explain how those services fit a clinic, real estate business, construction team or home service company. Use real workflows and examples where available.'] },
+      { heading: 'Make the next step easy and trustworthy', paragraphs: ['A contact form should ask only for information needed to start a useful conversation. Show a working email or phone option as an alternative, explain what happens after a request and make form errors understandable.', 'Use genuine project examples, clear team information and accurate business details to help visitors assess the company. Do not add invented testimonials or results to make a new website look established.'] },
+      { heading: 'Plan for search before launch', paragraphs: ['Choose one main topic for each page, then write its title, description and headings around that topic in natural language. Add descriptive links between related services, industries and case studies. Make sure important copy is available as text, pages load reliably and the site works across screen sizes.', 'Before development starts, agree on the audience, content owner, contact route and how the business will tell whether the site is helping. That gives the project a practical goal beyond simply publishing a new design.'] },
+    ],
+  },
+  {
+    slug: 'when-does-a-business-need-a-mobile-app',
+    title: 'When does a business need mobile app development?',
+    excerpt: 'How to decide whether a mobile app solves a recurring customer or team need better than a mobile website.',
+    category: 'Mobile app development',
+    date: '2026-11-25',
+    readTime: '2 min read',
+    relatedService: 'app-development',
+    sections: [
+      { heading: 'Quick answer: an app should make a repeated task easier', paragraphs: ['Mobile app development is worth exploring when customers or staff need to complete the same useful tasks regularly, and an installed app can make those tasks meaningfully easier. If people only need to read public information or contact a business occasionally, a responsive website may be the simpler place to start.'] },
+      { heading: 'Look for a recurring user need', paragraphs: ['Examples to investigate include checking order or booking status, managing account details, recording field work, receiving relevant updates or using a service while away from a desk. These are starting points, not proof that an app is necessary; first confirm that users actually want to do them often.', 'Write down the main user, the task they are trying to finish and what currently makes it difficult. If the problem is unclear, adding app screens will not make the product plan clearer.'] },
+      { heading: 'Compare an app with a mobile website', paragraphs: ['A mobile website is easier to open from a search result or shared link and does not require installation. An app may fit better when regular return use, device capabilities, account workflows or offline needs are central to the experience. The right choice depends on the audience, the task and ongoing maintenance capacity.', 'Consider how the app will connect to existing accounts, business data and services. Confirm which integrations are available and what should happen if a connection is unavailable.'] },
+      { heading: 'Scope a focused first release', paragraphs: ['Start with the smallest set of complete user journeys that can be tested with real users. Plan account security, permissions, privacy, error states and a way to support users—not only the ideal screen flow.', 'Define how success will be observed, such as whether users can complete the intended task or whether support requests about that task change. Those measures help decide what to improve after release without promising a result in advance.'] },
+    ],
+  },
+  {
+    slug: 'custom-pos-software-or-off-the-shelf',
+    title: 'Custom POS software or off-the-shelf: how should a business choose?',
+    excerpt: 'Compare a standard point-of-sale system with custom POS software by mapping checkout, inventory and reporting needs first.',
+    category: 'POS & custom software',
+    date: '2026-11-25',
+    readTime: '2 min read',
+    relatedService: 'pos-custom-software',
+    sections: [
+      { heading: 'Quick answer: use standard POS if it fits the real workflow', paragraphs: ['A ready-made point-of-sale system is often a sensible starting point when its checkout, inventory and reporting workflows match how the business operates. Custom POS software becomes worth assessing when important workarounds remain, required integrations are missing or the business rules do not fit available products.'] },
+      { heading: 'Map the work before comparing systems', paragraphs: ['Write down how a sale moves from item selection to payment, receipt, stock update, return or exchange. Include different product types, staff roles, branches and the reports owners actually use. This reveals what the POS must do and which requests are optional.', 'List current manual steps and their consequences. For example, staff may enter sales into one tool and update inventory in another. Confirm how often this occurs and what errors or delays it creates before deciding to build.'] },
+      { heading: 'Check integrations and exceptions', paragraphs: ['A POS may need to exchange information with accounting, inventory, e-commerce or customer systems. Confirm that those systems expose a supported integration, what data should move and which system is authoritative for each record.', 'Plan for exceptions such as refunds, network interruptions, stock corrections and permission changes. Payment processing, tax rules and hardware support vary by provider and country, so validate those requirements for the locations where the system will be used.'] },
+      { heading: 'Compare total effort, not just feature lists', paragraphs: ['Compare subscription and transaction costs, setup, migration, training, support and the effort of maintaining a custom product. A custom POS also needs a clear owner for future fixes, security updates and provider changes.', 'If a custom system appears justified, start with a documented scope and a narrow first release. Test the checkout and inventory flows with the people who use them before expanding to more branches or features.'] },
+    ],
+  },
+  {
+    slug: 'practical-ai-solutions-for-business-workflows',
+    title: 'Practical AI solutions for business: where should a team start?',
+    excerpt: 'A task-first way to assess AI features, knowledge assistants, human review and the data a workflow requires.',
+    category: 'AI solutions',
+    date: '2026-11-25',
+    readTime: '2 min read',
+    relatedService: 'ai-solutions',
+    sections: [
+      { heading: 'Quick answer: pick a specific task, not an AI trend', paragraphs: ['Practical AI solutions for a business begin with a repeated task that has clear inputs and a useful outcome. The first question is whether AI can help with that task safely and consistently—not which model or tool is most popular.'] },
+      { heading: 'Choose work where assistance can be checked', paragraphs: ['Potential tasks to assess include sorting incoming requests, finding information in approved documents, drafting a first response or summarizing material for a staff member. The value depends on the quality of the source information and how much review the output needs.', 'Avoid starting with an open-ended promise that AI will run a whole department. Break the workflow into a small step, identify a human owner and define what should happen when the system is uncertain.'] },
+      { heading: 'Set data and review rules early', paragraphs: ['Decide which information the AI feature may use, who can access it and whether sensitive customer or business data is involved. Check the provider terms and technical controls before sending real information to an external service.', 'For a knowledge assistant, keep the approved source material current and make it clear when the assistant cannot find an answer. For generated drafts or classifications, give a person a way to review, correct or reject the result.'] },
+      { heading: 'Test against real examples', paragraphs: ['Collect representative examples, including unusual cases and questions the system should decline to answer. Compare outputs with a human-reviewed reference and record common failure patterns before using the feature in a live workflow.', 'Define a practical measure such as review time, answer usefulness or routing accuracy, then monitor it after release. AI can make mistakes; plan escalation and correction paths as part of the product.'] },
+    ],
+  },
+  {
+    slug: 'business-process-automation-what-to-automate-first',
+    title: 'Business process automation: what should a company automate first?',
+    excerpt: 'Find repeatable tasks, map exceptions and choose a safe first workflow for business process automation.',
+    category: 'Business automation',
+    date: '2026-11-25',
+    readTime: '2 min read',
+    relatedService: 'business-automation',
+    sections: [
+      { heading: 'Quick answer: automate a stable, repeated process with clear exceptions', paragraphs: ['Business process automation is a good candidate when a task happens regularly, follows known rules and consumes time through repeated handoffs or data entry. First understand the current process, including its exceptions, before connecting tools or writing automation.'] },
+      { heading: 'Map the process from trigger to result', paragraphs: ['For each step, record what starts it, which information is needed, what rule is applied, who owns the next action and how completion is confirmed. Include delays, missing information, duplicate requests and approvals; these details often explain why a workflow cannot be automated safely as-is.', 'If people use different names or rules for the same task, agree on the process before implementation. Automating a process that changes every time can create more confusion instead of reducing it.'] },
+      { heading: 'Start with a small workflow', paragraphs: ['A useful first automation might move an approved form submission into a task queue, send a notification when a status changes or copy validated information between connected systems. Choose a flow with a clear owner and an outcome the team can check.', 'Confirm that the tools provide supported APIs or integrations, and decide what the automation should do when a service is unavailable or data fails validation. Use human approval for decisions that need judgment or have meaningful consequences.'] },
+      { heading: 'Monitor failures as well as time saved', paragraphs: ['Record successful runs, errors, retries and manual overrides so the team can see where the workflow needs attention. Restrict permissions to what the automation needs and document how a person can pause or correct it.', 'Set a baseline before launch—for example, how many handoffs occur or how long the task takes—then review actual use. A successful automation should be reliable for the people who depend on it, not simply run without visible errors.'] },
+    ],
   },
 ];

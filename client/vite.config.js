@@ -10,12 +10,15 @@ function seoFiles() {
     name: 'symmetric-code-seo-files',
     generateBundle() {
       const siteUrl = (process.env.VITE_SITE_URL || 'https://symmetriccode.tech').replace(/\/+$/, '');
+      const publishedLegalDocs = legalDocs.filter(doc =>
+        !doc.effectiveDate?.includes('{{') && doc.sections.every(([, body]) => !body.includes('{{')),
+      );
       const routes = [
         '/', '/services', ...services.map(service => `/services/${service.slug}`),
         '/solutions', ...solutions.map(item => `/solutions/${item.slug}`),
         '/work', '/pricing', '/about', '/team/aaliyan', '/contact', '/insights',
         ...blogPosts.map(post => `/insights/${post.slug}`),
-        ...legalDocs.map(doc => `/legal/${doc.slug}`),
+        ...publishedLegalDocs.map(doc => `/legal/${doc.slug}`),
       ];
       const urls = routes.map(path => `  <url><loc>${siteUrl}${path}</loc></url>`).join('\n');
       this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>` });
