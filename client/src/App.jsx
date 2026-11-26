@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, LayoutGroup, MotionConfig, motion } from 'framer-motion';
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown, ChevronRight, FolderOpen, MessageCircle, Minus, Plus, Send, X } from 'lucide-react';
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown, ChevronLeft, ChevronRight, FolderOpen, MessageCircle, Minus, Plus, Send, X } from 'lucide-react';
 import SEO from './components/SEO.jsx';
 import Turnstile from './components/Turnstile.jsx';
 import { blogPosts } from './data/blogPosts.js';
@@ -161,23 +161,36 @@ const homeProjectHighlights = [
   { id: 'skin-laser-clinic', eyebrow: 'HEALTHCARE / DR. HINA', title: 'Zahra Clinic website', summary: 'A clinic website presenting treatments, service information and a clear appointment enquiry path.', focus: 'Clinic services · Appointment enquiries' },
   { id: 'client-requirement', eyebrow: 'TOOLS & PLATFORMS / AALIYAN', title: 'Client Requirement portal', summary: 'A guided portal that helps clients describe website needs, review their answers and share a project brief.', focus: 'Guided intake · Shareable project brief' },
   { id: 'cafe', eyebrow: 'FOOD & HOSPITALITY / CAFÉ AROMA', title: 'Café Aroma website', summary: 'A café experience with an interactive menu, featured specials, a photo gallery and clear contact actions.', focus: 'Interactive menu · Contact and ordering CTA' },
+  { id: 'hair-transplant', eyebrow: 'HEALTHCARE / SELECTED WORK', title: 'Hair transplant website', summary: 'A clinic-focused site with procedure information, a before-and-after gallery, team profiles and a contact path.', focus: 'Treatment information · Clinic enquiries' },
+  { id: 'real-estate', eyebrow: 'REAL ESTATE / SELECTED WORK', title: 'Real estate website', summary: 'A property browsing experience with listings, search controls and lead-capture features for a Gulf-market demo.', focus: 'Property listings · Search · Lead capture' },
+  { id: 'gym', eyebrow: 'FITNESS / SELECTED WORK', title: 'Gym website', summary: 'A fitness studio site presenting programs, trainer profiles, class schedules and membership calls to action.', focus: 'Programs · Schedules · Membership enquiries' },
 ];
 
 function HomeProjectHighlights(){
   const featured = homeProjectHighlights.map(item => ({...item, project: projects.find(project => project.id === item.id)})).filter(item => item.project);
+  const [activeIndex,setActiveIndex]=useState(0);
+  const [paused,setPaused]=useState(false);
+  const changeReview=step=>setActiveIndex(index=>(index+step+featured.length)%featured.length);
+  const renderCard=({id,eyebrow,title,summary,focus,project},duplicate=false)=> <article className="home-highlight-card" key={`${id}${duplicate?'-duplicate':''}`}>
+    <span className="eyebrow">{eyebrow}</span>
+    <h3>{title}</h3>
+    <p>{summary}</p>
+    <span className="home-highlight-focus">{focus}</span>
+    {project.liveUrl&&<a className="home-highlight-action" href={project.liveUrl} target="_blank" rel="noreferrer">View project <ArrowUpRight size={14}/></a>}
+  </article>;
   return <section className="section home-project-highlights" aria-labelledby="home-project-highlights-title">
     <div className="section-heading">
-      <div><span className="eyebrow">PROJECT HIGHLIGHTS / 01—03</span><h2 id="home-project-highlights-title">Built around<br/><em>real workflows.</em></h2></div>
-      <p>Three selected projects, each shaped around a different business need.</p>
+      <div><span className="eyebrow">PROJECT HIGHLIGHTS / 01—06</span><h2 id="home-project-highlights-title">Different briefs.<br/><em>Thoughtful builds.</em></h2></div>
+      <p>Written snapshots of selected work, based on each project’s features and purpose.</p>
     </div>
-    <div className="home-highlight-grid">
-      {featured.map(({id,eyebrow,title,summary,focus,project})=><article className="home-highlight-card" key={id}>
-        <a className="home-highlight-image" href={project.liveUrl||'/work'} target={project.liveUrl?'_blank':undefined} rel={project.liveUrl?'noreferrer':undefined} aria-label={`Open ${title}`}>
-          <img src={project.image} alt={`${title} project preview`} loading="lazy"/>
-          <span className="home-highlight-open"><ArrowUpRight size={18}/></span>
-        </a>
-        <div className="home-highlight-copy"><span className="eyebrow">{eyebrow}</span><h3>{title}</h3><p>{summary}</p><span className="home-highlight-focus">{focus}</span></div>
-      </article>)}
+    <div className="home-highlight-desktop" onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} onFocusCapture={()=>setPaused(true)} onBlurCapture={event=>{if(!event.currentTarget.contains(event.relatedTarget))setPaused(false)}} aria-label="Project highlights scrolling carousel">
+      <div className={`home-highlight-track${paused?' is-paused':''}`}>
+        {[false,true].map(duplicate=><div className="home-highlight-group" key={String(duplicate)} aria-hidden={duplicate||undefined}>{featured.map(item=>renderCard(item,duplicate))}</div>)}
+      </div>
+    </div>
+    <div className="home-highlight-mobile">
+      {featured[activeIndex]&&renderCard(featured[activeIndex])}
+      <div className="home-highlight-controls"><button type="button" onClick={()=>changeReview(-1)} aria-label="Previous project highlight"><ChevronLeft size={16}/></button><span>0{activeIndex+1} <i/> 0{featured.length}</span><button type="button" onClick={()=>changeReview(1)} aria-label="Next project highlight"><ChevronRight size={16}/></button></div>
     </div>
     <Link className="text-link home-highlights-link" to="/work">Explore all projects <ArrowUpRight size={16}/></Link>
   </section>;
